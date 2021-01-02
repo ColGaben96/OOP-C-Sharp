@@ -137,7 +137,7 @@ namespace PROG1_MVC1.com.gabensoft.model
                     }
                     else
                     {
-                        ans = "quinientos diez";
+                        ans = "quinientos" + decimals(int.Parse(nums[1].ToString())) + " y " + units(int.Parse(nums[2].ToString()));
                     }
                 }
                 else if (nums[1] == '0' && nums[2] != '0')

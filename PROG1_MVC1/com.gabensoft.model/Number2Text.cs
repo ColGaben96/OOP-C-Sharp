@@ -43,6 +43,142 @@ namespace PROG1_MVC1.com.gabensoft.model
                     ans += " y " + units(int.Parse(nums[1].ToString()));
                 }
             }
+            else if(nums.Length == 3)
+            {
+                ans = cents(int.Parse(nums[0].ToString()));
+                if(ans.Equals("cien"))
+                {
+                    if(nums[1] != '0' && nums[2] != '0')
+                    {
+                        ans += "to ";
+                        string mydecimals = null;
+                        string myunits = null;
+                        mydecimals = decimals(int.Parse(nums[1].ToString()));
+                        if(mydecimals == null)
+                        {
+                            var translatedNum = nums[1].ToString() + nums[2].ToString();
+                            mydecimals += specificCases(int.Parse(translatedNum));
+                            ans += mydecimals;
+                        }
+                        else if(mydecimals.Equals("veinti"))
+                        {
+                            if (nums[2] == '0')
+                            {
+                                var translatedNum = nums[1].ToString() + nums[2].ToString();
+                                mydecimals = specificCases(int.Parse(translatedNum));
+                                ans += mydecimals;
+                            }
+                            else
+                            {
+                                ans += mydecimals + units(int.Parse(nums[2].ToString()));
+                            }
+                        }
+                        else
+                        {
+                            myunits = units(int.Parse(nums[2].ToString()));
+                            ans += mydecimals + "y" + myunits;
+                        }
+                    }
+                    else if(nums[1] == '0' && nums[2] != '0')
+                    {
+                        ans += "to ";
+                        string myunits = units(int.Parse(nums[2].ToString()));
+                        ans += myunits;
+                    }
+                    else if(nums[1] == '0' && nums[2] == '0')
+                    {
+                        ans = "cien";
+                    }
+                    else
+                    {
+                        ans = "ciento diez";
+                    }
+                }
+                else if (ans.Equals("quinientos "))
+                {
+                    if (nums[1] != '0' && nums[2] != '0')
+                    {
+                        string mydecimals = null;
+                        string myunits = null;
+                        mydecimals = decimals(int.Parse(nums[1].ToString()));
+                        if (mydecimals == null)
+                        {
+                            var translatedNum = nums[1].ToString() + nums[2].ToString();
+                            mydecimals += specificCases(int.Parse(translatedNum));
+                            ans += mydecimals;
+                        }
+                        else if (mydecimals.Equals("veinti"))
+                        {
+                            if (nums[2] == '0')
+                            {
+                                var translatedNum = nums[1].ToString() + nums[2].ToString();
+                                mydecimals = specificCases(int.Parse(translatedNum));
+                                ans += mydecimals;
+                            }
+                            else
+                            {
+                                ans += mydecimals + units(int.Parse(nums[2].ToString()));
+                            }
+                        }
+                        else
+                        {
+                            myunits = units(int.Parse(nums[2].ToString()));
+                            ans += mydecimals + " y " + myunits;
+                        }
+                    }
+                    else if (nums[1] == '0' && nums[2] != '0')
+                    {
+                        string myunits = units(int.Parse(nums[2].ToString()));
+                        ans += myunits;
+                    }
+                    else if (nums[1] == '0' && nums[2] == '0')
+                    {
+                        ans = "quinientos";
+                    }
+                    else
+                    {
+                        ans = "quinientos diez";
+                    }
+                }
+                else if (nums[1] == '0' && nums[2] != '0')
+                {
+                    ans += "cientos "+units(int.Parse(nums[2].ToString()));
+                }
+                else if (nums[1] == '0' && nums[2] == '0')
+                {
+                    ans += "cientos";
+                }
+                else
+                {
+                    ans += "cientos ";
+                    string mydecimals = decimals(int.Parse(nums[1].ToString()));
+                    string myunits = units(int.Parse(nums[2].ToString()));
+                    if (mydecimals == null)
+                    {
+                        var translatedNum = nums[1].ToString() + nums[2].ToString();
+                        mydecimals += specificCases(int.Parse(translatedNum));
+                        ans += mydecimals;
+                    }
+                    else if (mydecimals.Equals("veinti"))
+                    {
+                        if (nums[2] == '0')
+                        {
+                            var translatedNum = nums[1].ToString() + nums[2].ToString();
+                            mydecimals = specificCases(int.Parse(translatedNum));
+                            ans += mydecimals;
+                        }
+                        else
+                        {
+                            ans += mydecimals + units(int.Parse(nums[2].ToString()));
+                        }
+                    }
+                    else
+                    {
+                        ans += mydecimals + " y " + myunits;
+                    }
+
+                } 
+            }
             return ans;
 
         }
@@ -96,14 +232,6 @@ namespace PROG1_MVC1.com.gabensoft.model
             if (num == 20)
             {
                 ans = "veinte";
-            }
-            if (num == 100)
-            {
-                ans = "cien";
-            }
-            if (num > 100 && num < 200)
-            {
-                ans = "ciento";
             }
             return ans;
         }
@@ -218,6 +346,9 @@ namespace PROG1_MVC1.com.gabensoft.model
             string ans = null;
             switch (num)
             {
+                case 1:
+                    ans = "cien";
+                    break;
                 case 2:
                     ans = "dos";
                     break;
@@ -228,13 +359,13 @@ namespace PROG1_MVC1.com.gabensoft.model
                     ans = "cuatro";
                     break;
                 case 5:
-                    ans = "cinco";
+                    ans = "quinientos ";
                     break;
                 case 6:
                     ans = "seis";
                     break;
                 case 7:
-                    ans = "siete";
+                    ans = "sete";
                     break;
                 case 8:
                     ans = "ocho";
@@ -243,7 +374,7 @@ namespace PROG1_MVC1.com.gabensoft.model
                     ans = "nove";
                     break;
             }
-            return ans+"cientos";
+            return ans;
         }
 
         public string thousand(int num)
